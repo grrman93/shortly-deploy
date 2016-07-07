@@ -41,7 +41,14 @@ module.exports = function(grunt) {
     },
 
     cssmin: {
-        // Add list of files to lint here
+      target: {
+        files: [{
+          expand: true,
+          src: ['public/*.css'],
+          dest: 'public/dist/',
+          ext: '.min.css'
+        }]
+      }
     },
 
     watch: {
@@ -102,6 +109,7 @@ module.exports = function(grunt) {
     'test',
     'eslint',
     'concat',
+    'cssmin',
     'uglify'
   ]);
 
@@ -109,6 +117,7 @@ module.exports = function(grunt) {
     if (grunt.option('prod')) {
       // add your production server task here
       // put git code here to 'git push live master'
+      console.log('--prod option was triggered');
       grunt.task.run([ 'gitpush' ]);
     } else {
       grunt.task.run([ 'server-dev' ]);

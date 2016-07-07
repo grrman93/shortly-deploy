@@ -70,6 +70,7 @@ module.exports = function(grunt) {
 
     shell: {
       prodServer: {
+        command: 'git push live master'
       }
     },
 
@@ -99,7 +100,7 @@ module.exports = function(grunt) {
 
   ////////////////////////////////////////////////////
   // Main grunt tasks
-  ////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////  
 
   grunt.registerTask('test', [
     'mochaTest'
@@ -113,12 +114,17 @@ module.exports = function(grunt) {
     'uglify'
   ]);
 
+  // // To watch for changes and build accordingly:
+  // grunt.registerTask('watch-changes', function() {
+  //   grunt.task.run([ 'build', 'watch']);
+  // });
+
   grunt.registerTask('upload', function(n) {
     if (grunt.option('prod')) {
       // add your production server task here
       // put git code here to 'git push live master'
       console.log('--prod option was triggered');
-      grunt.task.run([ 'gitpush' ]);
+      grunt.task.run([ 'shell' ]);
     } else {
       grunt.task.run([ 'server-dev' ]);
     }
